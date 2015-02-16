@@ -1,0 +1,512 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.polycom.ngma</groupId>
+  <version>0.1.0-SNAPSHOT</version>
+
+  <artifactId>ngma-suite</artifactId>
+  <packaging>pom</packaging>
+
+  <name>ngma-suite</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <resource-manager.version>8.3.0-SNAPSHOT</resource-manager.version>
+    <ngma.version>0.1.0-SNAPSHOT</ngma.version>
+    <westrepo.url>http://westrepo.polycom.com:8081/artifactory</westrepo.url>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- build and package -->
+    <java.source.version>1.8</java.source.version>
+    <java.target.version>1.8</java.target.version>
+    <java.compiler.version>1.8</java.compiler.version>
+    <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
+    <maven-dependency-plugin.version>2.9</maven-dependency-plugin.version>
+    <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
+
+    <!-- junit and log -->
+    <junit.version>4.11</junit.version>
+    <slf4j.version>1.7.7</slf4j.version>
+    <logback.version>1.1.2</logback.version>
+    <args4j.version>2.0.29</args4j.version>
+
+    <servlet.version>3.1.0</servlet.version>
+    <spring.version>4.1.1.RELEASE</spring.version>
+    <apache-commons-dbcp2>2.0.1</apache-commons-dbcp2>
+    <apache-commons-pool.version>1.6</apache-commons-pool.version>
+    <apache-commons-pool2.version>2.2</apache-commons-pool2.version>
+    <commons.lang.version>3.3.2</commons.lang.version>
+    <commons.beanutils.version>1.9.2</commons.beanutils.version>
+    <google.guava.version>18.0</google.guava.version>
+    <cxf.version>3.0.2</cxf.version>
+    <gson.version>2.3</gson.version>
+    <jaxb.version>2.2.1</jaxb.version>
+    <postgre.version>9.3-1101-jdbc41</postgre.version>
+    <rabbitmq.amqp-client.version>3.3.5</rabbitmq.amqp-client.version>
+
+    <redis.clients.jedis.version>2.6.0</redis.clients.jedis.version>
+    <spring-data-redis.version>1.4.0.RELEASE</spring-data-redis.version>
+    <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
+    <fasterxml.jackson.version>2.4.3</fasterxml.jackson.version>
+    <spring-oxm.version>4.1.1.RELEASE</spring-oxm.version>
+
+    <io.netty.version>4.0.23.Final</io.netty.version>
+    <velocity.version>1.7</velocity.version>
+
+    <tomcat.version>8.0.12</tomcat.version>
+
+    <ngma.production.current.dir>/opt/polycom/ngma/current</ngma.production.current.dir>
+  </properties>
+
+  <modules>
+    <module>ngma-core-basic</module>
+    <module>ngma-core-app</module>
+    <module>product-rprm/projects</module>
+  </modules>
+
+  <repositories>
+    <repository>
+      <id>pillars-release-local</id>
+      <name>Platform team's (Pillars) Local Release Repository</name>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>${westrepo.url}/pillars-release-local</url>
+    </repository>
+
+  </repositories>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>com.polycom.pillars</groupId>
+        <artifactId>certificate-service</artifactId>
+        <version>0.1.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>args4j</groupId>
+        <artifactId>args4j</artifactId>
+        <version>${args4j.version}</version>
+      </dependency>
+
+      <!-- junit dependency -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- logging dependency -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jul-to-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+
+      <!-- xml -->
+      <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>${jaxb.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>${jaxb.version}</version>
+      </dependency>
+
+      <!-- servlet -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${servlet.version}</version>
+      </dependency>
+
+      <!-- tomcat -->
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>${tomcat.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-logging-juli</artifactId>
+        <version>${tomcat.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <version>${tomcat.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-jasper</artifactId>
+        <version>${tomcat.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-jasper-el</artifactId>
+        <version>${tomcat.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-jsp-api</artifactId>
+        <version>${tomcat.version}</version>
+      </dependency>
+
+      <!-- spring -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <!-- database -->
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgre.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-dbcp2</artifactId>
+        <version>${apache-commons-dbcp2}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-pool2</artifactId>
+        <version>${apache-commons-pool2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-pool</groupId>
+        <artifactId>commons-pool</artifactId>
+        <version>${apache-commons-pool.version}</version>
+      </dependency>
+
+      <!-- commons -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons.lang.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>${commons.beanutils.version}</version>
+      </dependency>
+
+      <!-- google -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${google.guava.version}</version>
+      </dependency>
+
+      <!-- cxf -->
+      <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        <version>${cxf.version}</version>
+      </dependency>
+
+      <!-- gson for json -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+
+      <!-- NGMA dependencies -->
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>ngma-shared</artifactId>
+        <version>${ngma.version}</version>
+        <type>jar</type>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>ngma-shared-nodeps</artifactId>
+        <version>${ngma.version}</version>
+        <type>jar</type>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>redis-service</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>rabbitmq-service</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>db-service</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>dal-service</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>user-management-service</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>access-proxy-service</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>certificate-manager</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>cluster-service</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>service-management</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>rest-service-monitoring</artifactId>
+        <version>${ngma.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>provision-service</artifactId>
+        <version>${ngma.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>process-launcher</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.polycom.ngma</groupId>
+        <artifactId>deployment-rprm</artifactId>
+        <version>${ngma.version}</version>
+      </dependency>
+      <!-- velocity -->
+      <dependency>
+        <groupId>org.apache.velocity</groupId>
+        <artifactId>velocity</artifactId>
+        <version>${velocity.version}</version>
+      </dependency>
+      <!-- netty -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-all</artifactId>
+        <version>${io.netty.version}</version>
+      </dependency>
+
+      <!-- Redis -->
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>${redis.clients.jedis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-redis</artifactId>
+        <version>${spring-data-redis.version}</version>
+      </dependency>
+
+      <!-- Jackson: used by spring-data-redis json -->
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>${codehaus.jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+        <version>${codehaus.jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${fasterxml.jackson.version}</version>
+      </dependency>
+
+      <!-- Jackson: codehaus - obsolete this at proper time -->
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-jaxrs</artifactId>
+        <version>${codehaus.jackson.version}</version>
+      </dependency>
+
+      <!-- Jackson: fasterxml -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.jaxrs</groupId>
+        <artifactId>jackson-jaxrs-json-provider</artifactId>
+        <version>${fasterxml.jackson.version}</version>
+      </dependency>
+
+      <!-- oxm: used by oxm serializer -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-oxm</artifactId>
+        <version>${spring-oxm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.castor</groupId>
+        <artifactId>castor-xml</artifactId>
+        <version>1.3.1</version>
+      </dependency>
+
+
+      <!-- RabbitMQ -->
+      <dependency>
+        <groupId>com.rabbitmq</groupId>
+        <artifactId>amqp-client</artifactId>
+        <version>${rabbitmq.amqp-client.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
+          <configuration>
+            <compilerVersion>${java.compiler.version}</compilerVersion>
+            <executable>${JAVA_HOME}/bin/javac</executable>
+            <source>${java.source.version}</source>
+            <target>${java.target.version}</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.7</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.17</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>jaxb2-maven-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jvnet.jaxb2.maven2</groupId>
+          <artifactId>maven-jaxb2-plugin</artifactId>
+          <version>0.9.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.gmaven</groupId>
+          <artifactId>gmaven-plugin</artifactId>
+          <version>1.5</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jvnet.jaxb2.maven2</groupId>
+          <artifactId>maven-jaxb22-plugin</artifactId>
+          <version>0.9.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.9</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>
