@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.polycom.ngma</groupId>
-    <artifactId>ngma-suite</artifactId>
+    <groupId>com.jeckzang.servicesnet</groupId>
+    <artifactId>servicesnet</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>ngma-core-app</artifactId>
+  <artifactId>basic-service</artifactId>
   <packaging>pom</packaging>
   <name>ngma-core-basic</name>
 
@@ -18,11 +18,6 @@
   </properties>
 
   <modules>
-    <module>access-proxy-service</module>
-    <module>cluster-service</module>
-    <module>service-management</module>
-    <module>rest-service-monitoring</module>
-    <module>deployment-ngma-core</module>
     <module>process-launcher</module>
   </modules>
 

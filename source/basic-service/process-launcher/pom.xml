@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.polycom.ngma</groupId>
-    <artifactId>ngma-core-app</artifactId>
+    <groupId>com.jeckzang.servicesnet</groupId>
+    <artifactId>basic-service</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -81,10 +81,6 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.polycom.ngma</groupId>
-      <artifactId>ngma-shared</artifactId>
-    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -114,7 +110,7 @@
               <appendAssemblyId>false</appendAssemblyId>
               <archive>
                 <manifest>
-                  <mainClass>com.polycom.ngma.processlauncher.TomcatLauncher</mainClass>
+                  <mainClass>com.jeckzang.servicesnet.processlauncher.TomcatLauncher</mainClass>
                 </manifest>
               </archive>
               <descriptorRefs>
@@ -126,33 +122,6 @@
             <goals>
               <goal>single</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-to-local-production</id>
-            <!-- here the phase you need -->
-            <phase>package</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${ngma.production.current.dir}/app</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>${project.build.directory}</directory>
-                  <filtering>false</filtering>
-                  <includes>
-                    <include>**/*.jar</include>
-                    <include>**/*.war</include>
-                  </includes>
-                </resource>
-              </resources>
-            </configuration>
           </execution>
         </executions>
       </plugin>

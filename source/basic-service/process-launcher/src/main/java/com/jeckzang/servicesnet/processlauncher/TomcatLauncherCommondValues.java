@@ -1,12 +1,10 @@
-package com.polycom.ngma.processlauncher;
+package com.jeckzang.servicesnet.processlauncher;
 
 import java.io.File;
 
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-
-import com.polycom.ngma.core.shared.utils.CommonCommandValues;
 
 public class TomcatLauncherCommondValues extends CommonCommandValues
 {

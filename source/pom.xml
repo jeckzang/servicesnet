@@ -2,25 +2,22 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.polycom.ngma</groupId>
+  <groupId>com.jeckzang.servicesnet</groupId>
   <version>0.1.0-SNAPSHOT</version>
 
-  <artifactId>ngma-suite</artifactId>
+  <artifactId>servicesnet</artifactId>
   <packaging>pom</packaging>
 
-  <name>ngma-suite</name>
+  <name>servicesnet</name>
   <url>http://maven.apache.org</url>
 
   <properties>
-    <resource-manager.version>8.3.0-SNAPSHOT</resource-manager.version>
-    <ngma.version>0.1.0-SNAPSHOT</ngma.version>
-    <westrepo.url>http://westrepo.polycom.com:8081/artifactory</westrepo.url>
+    <servicesnet.version>0.1.0-SNAPSHOT</servicesnet.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- build and package -->
-    <java.source.version>1.8</java.source.version>
-    <java.target.version>1.8</java.target.version>
-    <java.compiler.version>1.8</java.compiler.version>
+    <java.source.version>1.7</java.source.version>
+    <java.compiler.version>1.7</java.compiler.version>
     <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
     <maven-dependency-plugin.version>2.9</maven-dependency-plugin.version>
     <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
@@ -56,35 +53,16 @@
 
     <tomcat.version>8.0.12</tomcat.version>
 
-    <ngma.production.current.dir>/opt/polycom/ngma/current</ngma.production.current.dir>
   </properties>
 
   <modules>
-    <module>ngma-core-basic</module>
-    <module>ngma-core-app</module>
-    <module>product-rprm/projects</module>
+    <module>basic-service</module>
+    <module>basic-service-core</module>
+    <module>package</module>
+    <module>product</module>
   </modules>
-
-  <repositories>
-    <repository>
-      <id>pillars-release-local</id>
-      <name>Platform team's (Pillars) Local Release Repository</name>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <url>${westrepo.url}/pillars-release-local</url>
-    </repository>
-
-  </repositories>
-
   <dependencyManagement>
     <dependencies>
-
-      <dependency>
-        <groupId>com.polycom.pillars</groupId>
-        <artifactId>certificate-service</artifactId>
-        <version>0.1.1</version>
-      </dependency>
 
       <dependency>
         <groupId>args4j</groupId>
@@ -277,92 +255,6 @@
         <version>${gson.version}</version>
       </dependency>
 
-      <!-- NGMA dependencies -->
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>ngma-shared</artifactId>
-        <version>${ngma.version}</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>ngma-shared-nodeps</artifactId>
-        <version>${ngma.version}</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>redis-service</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>rabbitmq-service</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>db-service</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>dal-service</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>user-management-service</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>access-proxy-service</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>certificate-manager</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>cluster-service</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>service-management</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>rest-service-monitoring</artifactId>
-        <version>${ngma.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>provision-service</artifactId>
-        <version>${ngma.version}</version>
-        <type>war</type>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>process-launcher</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.polycom.ngma</groupId>
-        <artifactId>deployment-rprm</artifactId>
-        <version>${ngma.version}</version>
-      </dependency>
-      <!-- velocity -->
-      <dependency>
-        <groupId>org.apache.velocity</groupId>
-        <artifactId>velocity</artifactId>
-        <version>${velocity.version}</version>
-      </dependency>
       <!-- netty -->
       <dependency>
         <groupId>io.netty</groupId>
